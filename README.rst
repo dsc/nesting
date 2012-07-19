@@ -1,7 +1,8 @@
 nesting
 =======
 
-This module is a Python port of the [`nest` operator](https://github.com/mbostock/d3/wiki/Arrays#wiki-d3_nest) from Mike Bostock's [d3.js](http://d3js.org).
+This module is a Python port of the 
+`nest operator<https://github.com/mbostock/d3/wiki/Arrays#wiki-d3_nest>`__ from Mike Bostock's `d3.js<http://d3js.org>`__.
 
 
 Nest allows elements in an array to be grouped into a hierarchical tree structure;
@@ -67,4 +68,4 @@ The nested form allows easy iteration and generation of hierarchical structures 
 
 --
 
-This port is open-source, freely licensed under the [MIT License](http://dsc.mit-license.org).
+This port is open-source, freely licensed under the `MIT License<http://dsc.mit-license.org>`__.
