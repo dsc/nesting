@@ -56,20 +56,43 @@ Or more concisely:
 This returns a nested array. Each element of the outer array is a key-values pair, listing the values for each distinct key:
 
 ```py
-[   {"key": 1931, "values": [
-        {"key": "Manchuria", "values": [
+[   Entry(key=1931, values=[
+        Entry(key="Manchuria", values=[
             {"yield": 27.00, "variety": "Manchuria", "year": 1931, "site": "University Farm"},
             {"yield": 48.87, "variety": "Manchuria", "year": 1931, "site": "Waseca"},
-            {"yield": 27.43, "variety": "Manchuria", "year": 1931, "site": "Morris"}, ]},
-        {"key": "Glabron", "values": [
+            {"yield": 27.43, "variety": "Manchuria", "year": 1931, "site": "Morris"}, ]),
+        Entry(key="Glabron", values=[
             {"yield": 43.07, "variety": "Glabron", "year": 1931, "site": "University Farm"},
-            {"yield": 55.20, "variety": "Glabron", "year": 1931, "site": "Waseca"}, ]}, 
-    ]},
-    {"key": 1932, "values": [
-        {"key": "Glabron", "values": [
-            {"yield": 16.18, "variety": "Glabron", "year": 1932, "site": "University Farm"}, ]},
-    ]},
+            {"yield": 55.20, "variety": "Glabron", "year": 1931, "site": "Waseca"}, ]), 
+    ]),
+    Entry(key=1932, values=[
+        Entry(key="Glabron", values=[
+            {"yield": 16.18, "variety": "Glabron", "year": 1932, "site": "University Farm"}, ]),
+    ]),
 ]
+```
+
+`Entry` is a named tuple, making the parts both accessible by name (`key`, `values`) and indexable (0=key, 1=values).
+
+If you want a nested dict, use the `map` method:
+
+```py
+>>> Nest().key('year').key('variety').map(yields)
+OrderedDict([
+    (1931, OrderedDict([
+        ('Glabron', [
+            {'year': 1931, 'site': 'University Farm', 'yield': 43.07, 'variety': 'Glabron'}, 
+            {'year': 1931, 'site': 'Waseca', 'yield': 55.2, 'variety': 'Glabron'} ]), 
+        ('Manchuria', [
+            {'year': 1931, 'site': 'University Farm', 'yield': 27.0, 'variety': 'Manchuria'}, 
+            {'year': 1931, 'site': 'Waseca', 'yield': 48.87, 'variety': 'Manchuria'}, 
+            {'year': 1931, 'site': 'Morris', 'yield': 27.43, 'variety': 'Manchuria'} ])
+    ])), 
+    (1932, OrderedDict([
+        ('Glabron', [
+            {'year': 1932, 'site': 'University Farm', 'yield': 16.18, 'variety': 'Glabron'} ])
+    ]))
+])
 ```
 
 The nested form allows easy iteration and generation of hierarchical structures in SVG or HTML.
